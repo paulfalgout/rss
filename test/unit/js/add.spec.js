@@ -1,5 +1,3 @@
-var add = require('../../../src/js/add.js');
-
 describe('Add', function() {
   'use strict';
 

@@ -1,22 +1,28 @@
-var _ = require('underscore');
-var Backbone = require('backbone');
+var sinon = require('sinon');
 var $ = require('jquery');
-Backbone.$ = $;
-var Marionette = require('backbone.marionette');
 
-before(function() {
-  global._ = _;
-  global.Backbone = Backbone;
-  global.Marionette = Marionette;
-});
+var $body = $(document.body);
 
-beforeEach(function() {
+var setFixtures = function () {
+  _.each(arguments, function (content) {
+    $body.append(content);
+  });
+};
+
+var clearFixtures = function () {
+  $body.empty();
+};
+
+beforeEach(function () {
   this.sinon = sinon.sandbox.create();
-  global.stub = this.sinon.stub.bind(this.sinon);
-  global.spy  = this.sinon.spy.bind(this.sinon);
+  this.setFixtures   = setFixtures;
+  this.clearFixtures = clearFixtures;
 });
 
-afterEach(function() {
+afterEach(function () {
   this.sinon.restore();
+  clearFixtures();
+  window.location.hash = '';
   Backbone.history.stop();
+  Backbone.history.handlers.length = 0;
 });

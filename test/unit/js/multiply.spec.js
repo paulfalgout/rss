@@ -1,5 +1,3 @@
-var multiply = require('../../../src/js/multiply.js');
-
 describe('Multiply', function() {
   'use strict';
 
